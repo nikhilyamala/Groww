@@ -1,12 +1,14 @@
 package org.example.expenseSplit;
 
+import org.example.entities.SplitType;
+
 public class SplitFactory {
 
 
-    public IExpenseSplit getSplitObj(String splitType){
+    public static IExpenseSplit getSplitObj(SplitType splitType){
 
         switch (splitType){
-            case "percent":
+            case PERCENTAGE:
                 return new ExpenseSplitPercentage();
 
         }

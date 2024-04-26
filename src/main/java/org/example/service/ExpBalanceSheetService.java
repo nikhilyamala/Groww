@@ -35,6 +35,15 @@ public class ExpBalanceSheetService {
                 oweUserExp.setTotalOwe(oweUserExp.getTotalOwe() + oweAmount);
 
                 Balance userPaidBalance;
+                if(oweUserExp.getUserBalance().containsKey(expensePaidBy.getName())){
+                    userPaidBalance = oweUserExp.getUserBalance().get(expensePaidBy.getName());
+                }
+                else{
+                    userPaidBalance = new Balance();
+                    oweUserExp.getUserBalance().put(expensePaidBy.getName(), userPaidBalance);
+                }
+                userPaidBalance.setTotalOwe(userPaidBalance.getTotalOwe() + oweAmount);
+
 
 
             }

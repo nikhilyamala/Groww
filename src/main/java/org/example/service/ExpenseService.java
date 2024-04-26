@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.dao.ExpenseDao;
 import org.example.entities.Expense;
 import org.example.entities.*;
+import org.example.expenseSplit.IExpenseSplit;
+import org.example.expenseSplit.SplitFactory;
 
 import java.util.List;
 
@@ -25,7 +27,11 @@ public class ExpenseService {
 
         User paidUsr= userService.getUser(user);
 
+        IExpenseSplit expenseSplit = SplitFactory.getSplitObj(splitType);
+
         Expense expense = new Expense(desc,amount,paidUsr,splits, splitType);
+
+        expenseSplit.computeAmount(expense);
 
         expBalanceSheetService.updateUserExpBalanceSheet(paidUsr,splits,amount);
 

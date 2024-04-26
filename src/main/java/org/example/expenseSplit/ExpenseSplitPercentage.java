@@ -14,8 +14,7 @@ public class ExpenseSplitPercentage implements IExpenseSplit{
         double totalAmount = expense.getAmount();
 
         List<Split> allSplits = expense.getAllSplits();
-
-
+        validate(totalAmount,allSplits);
 
     }
 

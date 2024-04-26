@@ -5,16 +5,19 @@ import java.util.HashMap;
 public class UserExpBalanceSheet {
 
     private HashMap<String,Balance> userBalance;
-    private double totalExp;
-    private double totalGetback;
-    private double totalOwe;
+
+    private double totalPayment;
+    private double totalYourExp;
+    private double totalYouGetback;
+    private double totalYouOwe;
 
 
     public UserExpBalanceSheet() {
         this.userBalance = new HashMap<>();
-        this.totalExp = 0;
-        this.totalGetback = 0;
-        this.totalOwe = 0;
+        this.totalPayment = 0;
+        this.totalYourExp = 0;
+        this.totalYouOwe = 0;
+        this.totalYouGetback = 0;
     }
 
     public HashMap<String, Balance> getUserBalance() {
@@ -25,27 +28,35 @@ public class UserExpBalanceSheet {
         this.userBalance = userBalance;
     }
 
-    public double getTotalExp() {
-        return totalExp;
+    public double getTotalPayment() {
+        return totalPayment;
     }
 
-    public void setTotalExp(double totalExp) {
-        this.totalExp = totalExp;
+    public void setTotalPayment(double totalPayment) {
+        this.totalPayment = totalPayment;
     }
 
-    public double getTotalGetback() {
-        return totalGetback;
+    public double getTotalYourExp() {
+        return totalYourExp;
     }
 
-    public void setTotalGetback(double totalGetback) {
-        this.totalGetback = totalGetback;
+    public void setTotalYourExp(double totalYourExp) {
+        this.totalYourExp = totalYourExp;
     }
 
-    public double getTotalOwe() {
-        return totalOwe;
+    public double getTotalYouGetback() {
+        return totalYouGetback;
     }
 
-    public void setTotalOwe(double totalOwe) {
-        this.totalOwe = totalOwe;
+    public void setTotalYouGetback(double totalYouGetback) {
+        this.totalYouGetback = totalYouGetback;
+    }
+
+    public double getTotalYouOwe() {
+        return totalYouOwe;
+    }
+
+    public void setTotalYouOwe(double totalYouOwe) {
+        this.totalYouOwe = totalYouOwe;
     }
 }

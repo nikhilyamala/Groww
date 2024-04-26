@@ -11,42 +11,52 @@ public class ExpBalanceSheetService {
 
     public void updateUserExpBalanceSheet(User expensePaidBy, List<Split> splits, double totalExpAmount){
 
-        UserExpBalanceSheet paidExpSheet = expensePaidBy.getUserExpBalanceSheet();
-        paidExpSheet.setTotalExp(totalExpAmount);
-        for(Split split: splits){
-            User userOwe = split.getUser();
-            UserExpBalanceSheet oweUserExp = userOwe.getUserExpBalanceSheet();
+
+        UserExpBalanceSheet paidUserBalanceSheet = expensePaidBy.getUserExpBalanceSheet();
+        paidUserBalanceSheet.setTotalPayment(paidUserBalanceSheet.getTotalPayment() + totalExpAmount);
+
+        for (Split split : splits){
+
+            User splitUser = split.getUser();
             double oweAmount = split.getAmount();
-
-            if(expensePaidBy.getName().equalsIgnoreCase(userOwe.getName())){
-                paidExpSheet.setTotalExp(paidExpSheet.getTotalExp() + totalExpAmount);
+            if(splitUser.getName().equalsIgnoreCase(expensePaidBy.getName())){
+                paidUserBalanceSheet.setTotalYourExp(paidUserBalanceSheet.getTotalYourExp() + oweAmount);
             } else {
+                paidUserBalanceSheet.setTotalYouGetback(paidUserBalanceSheet.getTotalYouGetback() + oweAmount);
 
-                paidExpSheet.setTotalGetback(paidExpSheet.getTotalGetback() + oweAmount);
                 Balance userOweBalance;
 
-                if(paidExpSheet.getUserBalance().containsKey(userOwe.getName())){
-                    userOweBalance = paidExpSheet.getUserBalance().get(userOwe.getName());
+                if(paidUserBalanceSheet.getUserBalance().containsKey(splitUser.getName())){
+                    userOweBalance = paidUserBalanceSheet.getUserBalance().get(splitUser.getName());
                 } else {
                     userOweBalance = new Balance();
-                    paidExpSheet.getUserBalance().put(userOwe.getName(),userOweBalance);
                 }
-                userOweBalance.setTotalGetBack(userOweBalance.getTotalGetBack() + oweAmount);
-                oweUserExp.setTotalOwe(oweUserExp.getTotalOwe() + oweAmount);
+                userOweBalance.setAmountGetBack(userOweBalance.getAmountGetBack() + oweAmount);
+                paidUserBalanceSheet.getUserBalance().put(splitUser.getName(),userOweBalance);
 
-                Balance userPaidBalance;
-                if(oweUserExp.getUserBalance().containsKey(expensePaidBy.getName())){
-                    userPaidBalance = oweUserExp.getUserBalance().get(expensePaidBy.getName());
-                }
-                else{
-                    userPaidBalance = new Balance();
-                    oweUserExp.getUserBalance().put(expensePaidBy.getName(), userPaidBalance);
-                }
-                userPaidBalance.setTotalOwe(userPaidBalance.getTotalOwe() + oweAmount);
+                UserExpBalanceSheet oweUserExpBalanceSheet = splitUser.getUserExpBalanceSheet();
 
 
+                oweUserExpBalanceSheet.setTotalYourExp(oweUserExpBalanceSheet.getTotalYourExp() + oweAmount);
+                oweUserExpBalanceSheet.setTotalYouOwe(oweUserExpBalanceSheet.getTotalYouOwe() + oweAmount);
+
+
+                Balance paidUserBalance;
+
+                if(oweUserExpBalanceSheet.getUserBalance().containsKey(expensePaidBy.getName())){
+
+                    paidUserBalance = oweUserExpBalanceSheet.getUserBalance().get(expensePaidBy.getName());
+
+                } else {
+                    paidUserBalance = new Balance();
+                }
+
+                paidUserBalance.setAmountOwe(paidUserBalance.getAmountOwe() + oweAmount);
+                oweUserExpBalanceSheet.getUserBalance().put(expensePaidBy.getName(), paidUserBalance);
 
             }
         }
+
+        System.out.println("hello");
     }
 }

@@ -1,31 +1,31 @@
 package org.example.entities;
 
 public class Balance {
-    private double totalOwe;
-    private double totalGetBack;
+    private double amountOwe;
+    private double amountGetBack;
 
     public Balance(){
 
     }
 
     public Balance(double totalOwe, double totalGetBack) {
-        this.totalOwe = totalOwe;
-        this.totalGetBack = totalGetBack;
+        this.amountOwe = totalOwe;
+        this.amountGetBack = totalGetBack;
     }
 
-    public double getTotalOwe() {
-        return totalOwe;
+    public double getAmountOwe() {
+        return amountOwe;
     }
 
-    public void setTotalOwe(double totalOwe) {
-        this.totalOwe = totalOwe;
+    public void setAmountOwe(double amountOwe) {
+        this.amountOwe = amountOwe;
     }
 
-    public double getTotalGetBack() {
-        return totalGetBack;
+    public double getAmountGetBack() {
+        return amountGetBack;
     }
 
-    public void setTotalGetBack(double totalGetBack) {
-        this.totalGetBack = totalGetBack;
+    public void setAmountGetBack(double amountGetBack) {
+        this.amountGetBack = amountGetBack;
     }
 }

@@ -31,7 +31,7 @@ public class ExpenseService {
 
         Expense expense = new Expense(desc,amount,paidUsr,splits, splitType);
 
-        expenseSplit.computeAmount(expense);
+        //expenseSplit.computeAmount(expense);
 
         expBalanceSheetService.updateUserExpBalanceSheet(paidUsr,splits,amount);
 
